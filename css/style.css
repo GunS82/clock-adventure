@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #fbbf24;
+    --secondary-dark: #f59e0b;
+    --bg-color: #f0f9ff;
+    --text-color: #1e3a8a;
+    --success: #22c55e;
+    --error: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 800px;
+    height: 100vh;
+    max-height: 900px;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
+}
+
+.btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+}
+
+.btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.btn.primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn.secondary {
+    background-color: var(--secondary);
+    color: #451a03;
+}
+
+.btn.secondary:hover {
+    background-color: var(--secondary-dark);
+}
+
+.btn.small {
+    font-size: 1rem;
+    padding: 8px 16px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.btn.small:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+.stars-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Map Screen */
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.level-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e0e7ff;
+    border: 3px solid var(--primary);
+    color: var(--primary-dark);
+    font-weight: 900;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.level-btn:hover {
+    transform: scale(1.1);
+}
+
+.level-btn.locked {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.level-btn.locked:hover {
+    transform: none;
+}
+
+.level-stars {
+    font-size: 0.6rem;
+    position: absolute;
+    bottom: -15px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Game Screen */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.level-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#question-container {
+    text-align: center;
+    margin-bottom: 20px;
+    min-height: 80px;
+}
+
+#hint-text {
+    color: #047857;
+    background: #d1fae5;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-weight: bold;
+    animation: fadeIn 0.3s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.clock-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+}
+
+.actions-area {
+    display: flex;
+    gap: 20px;
+}
+
+/* Feedback Overlay */
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.feedback-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#feedback-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#feedback-stars {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feedback-box.success #feedback-title { color: var(--success); }
+.feedback-box.error #feedback-title { color: var(--error); }
+
+/* Shake animation for wrong answer */
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .levels-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; }
+    .level-btn { width: 50px; height: 50px; }
+    .btn { padding: 10px 20px; }
+}
+
+/* SVG Map */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #e0f2fe;
+    border: 4px solid var(--primary);
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.map-svg {
+    width: 100%;
+    min-height: 800px;
+}
+.map-zone-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    fill: #1e3a8a;
+    text-anchor: middle;
+}
+
+/* Rewards Screen */
+.medals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+.medal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.medal-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.medal-bronze { color: #cd7f32; }
+.medal-silver { color: #c0c0c0; }
+.medal-gold { color: #ffd700; }
+.medal-locked { filter: grayscale(100%); opacity: 0.5; }
+
+/* Dialog Overlay */
+.dialog-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+}
+.dialog-character {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+.dialog-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "clock-adventure",
+  "version": "1.0.0",
+  "description": "Clock adventure game for kids",
+  "scripts": {
+    "test": "node -e \"const fs=require('fs');const vm=require('vm');const dom={createElementNS:()=>({setAttribute:()=>{},style:{},appendChild:()=>{},addEventListener:()=>{}}),createElement:()=>({setAttribute:()=>{},style:{},appendChild:()=>{},addEventListener:()=>{},classList:{add:()=>{},remove:()=>{}},className:''}),getElementById:(id)=>({innerHTML:'',appendChild:()=>{},classList:{add:()=>{},remove:()=>{}},style:{}})};const windowMock={addEventListener:()=>{},innerWidth:800};const localStorageMock=(function(){let store={};return{getItem(key){return store[key]||null;},setItem(key,value){store[key]=value.toString();},clear(){store={};}}})();const context=vm.createContext({document:dom,window:windowMock,console:console,localStorage:localStorageMock});vm.runInContext(fs.readFileSync('js/levels.js','utf8'),context);vm.runInContext(fs.readFileSync('js/clock.js','utf8'),context);vm.runInContext(fs.readFileSync('js/tests.js','utf8'),context);vm.runInContext('runTests()',context);\""
+  }
+}
