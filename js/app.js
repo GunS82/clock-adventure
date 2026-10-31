@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "map-svg");
-        svg.setAttribute("viewBox", "0 0 400 1000"); // arbitrary size
+        svg.setAttribute("viewBox", "0 0 400 1100"); // fits zone 3 (last node at y=1050)
         
         // Define zones
         const zones = [
@@ -394,7 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function generateCompareOptions(level) {
-        level.options.forEach(opt => {
+        const shuffled = [...level.options].sort(() => Math.random() - 0.5);
+        shuffled.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'btn secondary option-btn';
             btn.textContent = opt;
